@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購物車特效示範</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* 調整：換成沉浸式的深暗灰黑底色，徹底進入暗黑電競模式 */
+    background: #121212; 
+    color: #e9ecef; /* 冷白文字，確保在暗色背景下的極佳可讀性 */
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* ==================== 購物車圖示（固定位置） ==================== */
+.shopping-cart-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.cart-icon {
+    width: 50px;
+    height: 50px;
+    background: #1e1e1e; /* 暗色卡片底色 */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 調整：使用微弱的冷色邊框，並加上霓虹青色的環境發光（Glow） */
+    border: 1px solid #2d3135;
+    box-shadow: 0 4px 15px rgba(13, 202, 240, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    position: relative;
+}
+
+.cart-icon:hover {
+    transform: scale(1.05);
+    border-color: #0dcaf0; /* Hover 時邊框亮起青光 */
+    box-shadow: 0 6px 20px rgba(13, 202, 240, 0.3);
+}
+
+/* 購物車SVG圖示 */
+.cart-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: #0dcaf0; /* 調整：圖示改為霓虹青色，像發光的儀表板 */
+}
+
+/* 計數泡泡（Badge） */
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 28px;
+    height: 28px;
+    background: #20c997; /* 調整：計數改為螢光薄荷綠，在暗色下極度耀眼 */
+    color: #121212; /* 暗色字體與亮色背景形成高對比 */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 13px;
+    box-shadow: 0 2px 10px rgba(32, 201, 151, 0.4);
+    transition: transform 0.3s ease;
+}
+
+/* 購物車晃動動畫 */
+@keyframes cartShake {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-5px) rotate(-2deg); }
+    50% { transform: translateX(5px) rotate(2deg); }
+    75% { transform: translateX(-5px) rotate(-2deg); }
+}
+
+@keyframes cartScale {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.cart-icon.shake {
+    animation: cartShake 0.5s ease-in-out;
+}
+
+.cart-badge.pulse {
+    animation: cartScale 0.4s ease-in-out;
+}
+
+/* ==================== 商品容器 ==================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-title {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+.page-title h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.page-title p {
+    font-size: 16px;
+    color: #a0aec0; /* 調整：副標改為帶冷色調的灰字 */
+}
+
+/* ==================== 商品卡片 ==================== */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.product-card {
+    background: #1e1e1e; /* 調整：深灰黑色卡片背景，突顯科技硬體感 */
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #2d3135; /* 細微的暗色邊框區隔 */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    border-color: #3d4248; /* Hover 時卡片邊框微亮 */
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+.product-image {
+    width: 100%;
+    height: 250px;
+    /* 調整：將商品背景改為暗沉的科技漸層（深灰到藏青藍），完美襯托 RGB 發光硬體或 3C 商品 */
+    background: linear-gradient(135deg, #1A202C 0%, #2D3748 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff; /* 純白商品名稱 */
+    margin-bottom: 8px;
+}
+
+.product-description {
+    font-size: 14px;
+    color: #a0aec0; /* 冷灰字體 */
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.product-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0dcaf0; /* 調整：價格改用霓虹青色，極具未來科技感 */
+}
+
+/* ==================== 加入購物車按鈕 ==================== */
+.add-to-cart-btn {
+    width: 100%;
+    padding: 12px 16px;
+    /* 調整：改為螢光薄荷綠（#20c997）到深薄荷綠的漸層，在暗黑風格中扮演最強烈的行動指引 */
+    background: linear-gradient(135deg, #20c997 0%, #1aa179 100%);
+    color: #121212; /* 深色字，確保易讀性 */
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.add-to-cart-btn:hover {
+    transform: scale(1.02);
+    /* Hover 時按鈕釋放出強烈的螢光綠綠色光暈（Glow 效果） */
+    box-shadow: 0 6px 25px rgba(32, 201, 151, 0.45);
+}
+
+.add-to-cart-btn:active {
+    transform: scale(0.98);
+}
+
+/* ==================== 動畫飛行物件 ==================== */
+.flying-item {
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.flying-item-circle {
+    width: 40px;
+    height: 40px;
+    /* 調整：飛行小球同步改為螢光綠漸層與綠光陰影，拋物線飛向購物車時會非常帥氣 */
+    background: linear-gradient(135deg, #20c997 0%, #1aa179 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #121212;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(32, 201, 151, 0.6);
+}
+
+/* ==================== 響應式設計 ==================== */
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .page-title h1 {
+        font-size: 24px;
+    }
+
+    .shopping-cart-container {
+        top: 15px;
+        right: 15px;
+    }
+
+    .cart-icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .cart-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- ==================== 購物車 ==================== -->
+    <div class="shopping-cart-container">
+        <div class="cart-icon" id="cartIcon">
+            <!-- 購物車SVG圖示 -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 4V3c0-.5-.5-1-1-1s-1 .5-1 1v1H2c-.5 0-1 .5-1 1s.5 1 1 1h1.15l.5 6.1c.1 1 1 1.9 2 1.9h12.7c1 0 1.9-.9 2-1.9L22.85 6H23c.5 0 1-.5 1-1s-.5-1-1-1h-2.15V3c0-.5-.5-1-1-1s-1 .5-1 1v1H8V3c0-.5-.5-1-1-1s-1 .5-1 1v1H7zm9 16c1.1 0 2-1 2-2s-1-2-2-2-2 1-2 2 1 2 2 2zm-7 0c1.1 0 2-1 2-2s-1-2-2-2-2 1-2 2 1 2 2 2z"/>
+            </svg>
+            <span class="cart-badge" id="cartBadge">0</span>
+        </div>
+    </div>
+
+    <!-- ==================== 頁面內容 ==================== -->
+    <div class="container">
+        <div class="page-title">
+            <h1>🛍️ 線上購物體驗</h1>
+            <p>點擊「加入購物車」按鈕，觀看商品飛入購物車的特效</p>
+        </div>
+
+        <div class="products-grid">
+            <!-- 商品 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop" alt="無線耳機">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">無線藍牙耳機</div>
+                    <div class="product-description">高品質音效，30小時續航力，舒適貼耳設計。</div>
+                    <div class="product-price">
+                        <span class="price">NT$ 1,299</span>
+                    </div>
+                    <button class="add-to-cart-btn" data-product-id="1" data-product-name="無線藍牙耳機" data-product-emoji="🎧">
+                        加入購物車
+                    </button>
+                </div>
+            </div>
+
+            <!-- 商品 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop" alt="智慧手錶">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">智慧運動手錶</div>
+                    <div class="product-description">心率監測，GPS定位，7天續航，多運動模式。</div>
+                    <div class="product-price">
+                        <span class="price">NT$ 2,499</span>
+                    </div>
+                    <button class="add-to-cart-btn" data-product-id="2" data-product-name="智慧運動手錶" data-product-emoji="⌚">
+                        加入購物車
+                    </button>
+                </div>
+            </div>
+
+            <!-- 商品 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1506617314462-29ba36461c8d?w=400&h=300&fit=crop" alt="無線充電盤">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">快速無線充電盤</div>
+                    <div class="product-description">15W快充，支援多種設備，LED指示燈。</div>
+                    <div class="product-price">
+                        <span class="price">NT$ 599</span>
+                    </div>
+                    <button class="add-to-cart-btn" data-product-id="3" data-product-name="快速無線充電盤" data-product-emoji="🔌">
+                        加入購物車
+                    </button>
+                </div>
+            </div>
+
+            <!-- 商品 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=300&fit=crop" alt="顯示器">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">27吋4K顯示器</div>
+                    <div class="product-description">4K解析度，144Hz刷新率，HDR支援。</div>
+                    <div class="product-price">
+                        <span class="price">NT$ 8,999</span>
+                    </div>
+                    <button class="add-to-cart-btn" data-product-id="4" data-product-name="27吋4K顯示器" data-product-emoji="🖥️">
+                        加入購物車
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== 購物車狀態管理 ====================
+        class ShoppingCart {
+            constructor() {
+                this.cartCount = 0;
+                this.cartIcon = document.getElementById('cartIcon');
+                this.cartBadge = document.getElementById('cartBadge');
+
+                // 檢查零件是否都齊全
+                if (!this.cartIcon || !this.cartBadge) {
+                    console.error("錯誤：找不到購物車圖示或數字泡泡！請檢查 HTML ID。");
+                    return;
+                }
+
+                this.initializeEventListeners();
+            }
+
+            // 初始化所有「加入購物車」按鈕的點擊事件
+            initializeEventListeners() {
+                const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+                addToCartButtons.forEach(button => {
+                    button.addEventListener('click', (e) => this.handleAddToCart(e));
+                });
+            }
+
+            // 處理「加入購物車」按鈕點擊
+            handleAddToCart(event) {
+                const button = event.currentTarget;
+                const productName = button.dataset.productName;
+                const productEmoji = button.dataset.productEmoji;
+
+                // 取得按鈕的位置信息
+                const buttonRect = button.getBoundingClientRect();
+                const startX = buttonRect.left + buttonRect.width / 2;
+                const startY = buttonRect.top + buttonRect.height / 2;
+
+                // 建立並執行飛行動畫
+                this.createFlyingAnimation(startX, startY, productEmoji, productName);
+
+                // 觸發購物車反饋動畫
+                this.triggerCartFeedback();
+
+                // 更新計數
+                this.addItem(productName);
+            }
+
+            // 建立飛行物件並執行動畫
+            createFlyingAnimation(startX, startY, emoji, productName) {
+                // 建立飛行物件
+                const flyingItem = document.createElement('div');
+                flyingItem.className = 'flying-item';
+                flyingItem.innerHTML = `<div class="flying-item-circle">${emoji}</div>`;
+                document.body.appendChild(flyingItem);
+
+                // 取得購物車圖示的位置
+                const cartRect = this.cartIcon.getBoundingClientRect();
+                const endX = cartRect.left + cartRect.width / 2;
+                const endY = cartRect.top + cartRect.height / 2;
+
+                // 初始位置
+                flyingItem.style.left = startX + 'px';
+                flyingItem.style.top = startY + 'px';
+
+                // 強制瀏覽器重繪，確保初始位置已應用
+                flyingItem.offsetHeight;
+
+                // 計算動畫時間（約0.6秒）
+                const duration = 600;
+                const startTime = performance.now();
+
+                // 使用 requestAnimationFrame 實現流暢動畫
+                const animate = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+
+                    // 使用貝茲曲線實現拋物線效果
+                    // x軸：線性進度
+                    // y軸：拋物線（二次函數）
+                    const easeProgress = progress < 0.5 
+                        ? 2 * progress * progress 
+                        : -1 + (4 - 2 * progress) * progress;
+
+                    const currentX = startX + (endX - startX) * progress;
+                    const currentY = startY + (endY - startY) * easeProgress;
+
+                    // 隨著動畫進行，物件逐漸縮小
+                    const scale = 1 - progress * 0.7;
+
+                    flyingItem.style.left = currentX + 'px';
+                    flyingItem.style.top = currentY + 'px';
+                    flyingItem.style.transform = `translate(-50%, -50%) scale(${scale})`;
+                    flyingItem.style.opacity = 1 - progress * 0.3;
+
+                    // 動畫未完成，繼續執行
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        // 動畫完成，移除飛行物件
+                        flyingItem.remove();
+                    }
+                };
+
+                requestAnimationFrame(animate);
+            }
+
+            // 觸發購物車的反饋動畫（晃動+縮放）
+            triggerCartFeedback() {
+                // 晃動動畫
+                this.cartIcon.classList.add('shake');
+                setTimeout(() => {
+                    this.cartIcon.classList.remove('shake');
+                }, 500);
+
+                // 計數泡泡縮放動畫
+                this.cartBadge.classList.add('pulse');
+                setTimeout(() => {
+                    this.cartBadge.classList.remove('pulse');
+                }, 400);
+            }
+
+            // 添加商品到購物車，更新計數
+            addItem(productName) {
+                this.cartCount++;
+                this.updateBadge();
+                console.log(`成功加入商品：${productName}，目前購物車共有 ${this.cartCount} 個物品`);
+            }
+
+            // 更新計數泡泡顯示
+            updateBadge() {
+                this.cartBadge.textContent = this.cartCount;
+            }
+        }
+
+        // ==================== 頁面加載時初始化 ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = new ShoppingCart();
+        });
+    </script>
+</body>
+</html>

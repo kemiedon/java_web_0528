@@ -1,0 +1,335 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    gap: 40px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+/* 商品卡片 */
+.product-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    min-width: 300px;
+}
+
+.product-image {
+    width: 100%;
+    height: 250px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.price {
+    font-size: 28px;
+    color: #e74c3c;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* 數量控制 */
+.quantity-control {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-control label {
+    color: #555;
+    font-weight: 500;
+}
+
+.quantity-control input {
+    width: 70px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* 加入購物車按鈕 */
+.add-to-cart-btn {
+    width: 100%;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.add-to-cart-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+}
+
+.add-to-cart-btn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.add-to-cart-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 按鈕點擊動畫 */
+.add-to-cart-btn.clicked {
+    animation: buttonPulse 0.6s ease-out;
+}
+
+@keyframes buttonPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 15px rgba(102, 126, 234, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+    }
+}
+
+/* 商品卡片抖動 */
+.product-card.shake {
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* 訊息提示 */
+.message {
+    margin-top: 15px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    text-align: center;
+    min-height: 20px;
+    animation: slideDown 0.3s ease-out;
+}
+
+.message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+.message.loading {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+    display: block;
+}
+
+.message.hidden {
+    display: none;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 購物車 */
+.shopping-cart {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    flex: 0 0 300px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.cart-header h3 {
+    color: #333;
+    font-size: 18px;
+}
+
+.cart-count {
+    background: #e74c3c;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    animation: countUpdate 0.3s ease-out;
+}
+
+@keyframes countUpdate {
+    0% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.cart-list {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    animation: slideDown 0.3s ease-out;
+}
+
+.cart-item-name {
+    flex: 1;
+    color: #333;
+}
+
+.cart-item-price {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.cart-item-remove {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.2s;
+}
+
+.cart-item-remove:hover {
+    background: #c0392b;
+}
+
+.cart-total {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: right;
+    color: #333;
+    font-size: 16px;
+}
+
+.cart-total span {
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* 浮動粒子效果 */
+.floating-particle {
+    position: fixed;
+    pointer-events: none;
+    font-size: 24px;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) translateX(20px) scale(0.5);
+    }
+}
+
+.floating-particle.float {
+    animation: floatUp 1s ease-out forwards;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .shopping-cart {
+        flex: 1;
+        max-width: 100%;
+    }
+
+    .product-card {
+        min-width: auto;
+    }
+}
