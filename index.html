@@ -1,48 +1,775 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>加入購物車動畫 - Demo</title>
+    <title>La Petite Joie 甜點手作坊 - 一口咬下的極致法式幸福</title>
+    <!-- 引入 Google Fonts 與 Font Awesome 圖示 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="product-card">
-            <div class="product-image">
-                <img src="https://via.placeholder.com/200?text=商品" alt="商品">
-            </div>
-            <div class="product-info">
-                <h2>示範商品</h2>
-                <p class="price">￥99.99</p>
-                <p class="description">這是一個演示商品</p>
-                
-                <div class="quantity-control">
-                    <label for="quantity">數量：</label>
-                    <input type="number" id="quantity" value="1" min="1" max="10">
+
+    <!-- 導覽列 -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-cookie-bite"></i> La Petite Joie
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#about">職人精神</a></li>
+                <li><a href="#products">明星甜點</a></li>
+                <li><a href="#reviews">老饕好評</a></li>
+                <li><a href="#faq">常問問題</a></li>
+            </ul>
+            <a href="#checkout" class="btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">立即預訂</a>
+        </div>
+    </header>
+
+    <!-- 首頁區 (Hero Section) -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-badge">✿ 一週只賣三天的法式精品甜點 ✿</span>
+                <h1>一口咬下，<br>遇見極致濃郁的<span>法式幸福</span></h1>
+                <p>嚴選日本頂級小山園抹茶、法國 AOP 認證鮮奶油。每一款甜點都是職人當日手工現烤，為你的午後生活上一抹溫暖的儀式感。</p>
+                <div class="hero-btns">
+                    <a href="#checkout" class="btn-primary"><i class="fa-solid fa-basket-shopping"></i> 今日限量預訂</a>
+                    <a href="#products" class="btn-outline">探索美味品項</a>
                 </div>
+            </div>
+            
+        </div>
+    </section>
 
-                <button id="addBtn" class="add-to-cart-btn">
-                    加入購物車
-                </button>
-
-                <div id="message" class="message"></div>
+    <!-- 品牌精神與食材講究 (Brand Story) -->
+    <section class="about-container" id="about">
+        <div class="about-images">
+            <img src="images/store3.png" alt="職人手作過程" class="about-img-1">
+            <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=500&q=80" alt="美味的草莓蛋糕" class="about-img-2">
+        </div>
+        <div class="about-content">
+            <span class="section-subtitle">OUR SPIRIT</span>
+            <h3>為什麼我們的甜點，<br>吃過就回不去了？</h3>
+            <p>我們深信，甜點是忙碌生活裡最溫柔的療癒。La Petite Joie（微小的喜悅）以此為名，拒絕任何人工香精與廉價代可可脂。主廚堅持繁複的純手作工法，用最奢華的天然食材，勾勒出層次分明的細緻風味。</p>
+            <p>「少糖，卻多了靈魂。」這是一份連自己家人、孩子都能安心大口享用的頂級手作溫度。</p>
+            
+            <div class="features">
+                <div class="feature-item">
+                    <i class="fa-solid fa-wheat-awn"></i>
+                    <h4>極致食材</h4>
+                    <p>進口發酵奶油、當季水果</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <h4>當日現烤</h4>
+                    <p>新鮮製作，完美熟成保鮮</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-percent"></i>
+                    <h4>輕盈減糖</h4>
+                    <p>精算糖分，甜而不膩無負擔</p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="shopping-cart">
-            <div class="cart-header">
-                <h3>購物車</h3>
-                <span class="cart-count" id="cartCount">0</span>
+    <!-- 產品展示區 (Product Showcase) -->
+    <section class="section-bg-cream" id="products">
+        <div class="section-title-box">
+            <span class="section-subtitle">MENU</span>
+            <h2 class="section-title">今日限定職人手作</h2>
+        </div>
+        
+        <div class="product-container">
+            <!-- 產品 1：馬卡龍 -->
+            <div class="product-card">
+                <span class="product-tag hot">人氣首選</span>
+                <div class="product-img-box">
+                    <img src="images/products/wmremove-macaron.png" alt="經典法式馬卡龍" class="product-img" onerror="this.src='https://images.unsplash.com/photo-1558961309-dbdf447856d6?auto=format&fit=crop&w=600&q=80'">
+                </div>
+                <div class="product-body">
+                    <h3 class="product-title">經典法式馬卡龍</h3>
+                    <p class="product-quote">「不用飛巴黎，也能享受微甜的浪漫。」</p>
+                    <p class="product-desc">正統法式減糖配方！外皮溫控烘烤呈完美裙擺，外酥內軟。特調杏仁香與甘納許內餡細緻綿密，打破馬卡龍「死甜」刻板印象，口齒留香。</p>
+                    <div class="product-meta">
+                        <span><i class="fa-solid fa-box-open"></i> 精緻盒裝 (5入組)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <div class="price-wrapper">
+                            <span class="price-label">暖心嚐鮮價</span>
+                            <span class="product-price">NT$ 200 <span style="font-size:0.8rem; font-weight:normal;">/ 盒</span></span>
+                        </div>
+                        <button class="buy-now-btn" onclick="scrollToCheckoutAndSelect('macaron')" title="加入訂單"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
             </div>
-            <div id="cartList" class="cart-list"></div>
-            <div class="cart-total">
-                <strong>總計：</strong>
-                <span id="totalPrice">￥0.00</span>
+
+            <!-- 產品 X：栗子蒙布朗蛋糕 -->
+            <div class="product-card">
+                <span class="product-tag">新品上市</span>
+                <div class="product-img-box">
+                    <img src="https://images.unsplash.com/photo-1511081107435-97621f379207?auto=format&fit=crop&w=600&q=80" alt="栗子蒙布朗蛋糕" class="product-img" onerror="this.src='https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80'">
+                </div>
+                <div class="product-body">
+                    <h3 class="product-title">栗子蒙布朗蛋糕</h3>
+                    <p class="product-quote">「如雲峰般的優雅，每一口都是秋天的溫潤。」</p>
+                    <p class="product-desc">嚴選法國頂級栗子泥，層層堆疊如雲峰般的細緻口感。內含滑順香草香緹與酥脆塔皮，甜而不膩，完美演繹秋日法式經典。</p>
+                    <div class="product-meta">
+                        <span><i class="fa-solid fa-leaf"></i> 秋日限定 · 精緻單入</span>
+                    </div>
+                    <div class="product-price-box">
+                        <div class="price-wrapper">
+                            <span class="price-label">暖心嚐鮮價</span>
+                            <span class="product-price">NT$ 170 <span style="font-size:0.8rem; font-weight:normal;">/ 個</span></span>
+                        </div>
+                        <button class="buy-now-btn" onclick="scrollToCheckoutAndSelect('chestnut-montblanc')" title="加入訂單"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
             </div>
+
+            <!-- 產品 2：草莓蛋糕 -->
+            <div class="product-card">
+                <span class="product-tag">季節限定</span>
+                <div class="product-img-box">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="戀戀雪莓戚風蛋糕" class="product-img" onerror="this.src='https://images.unsplash.com/photo-1464349110296-4d53f81de13c?auto=format&fit=crop&w=600&q=80'">
+                </div>
+                <div class="product-body">
+                    <h3 class="product-title">戀戀雪莓戚風蛋糕</h3>
+                    <p class="product-quote">「每一口，都是初戀的甜蜜酸甜。」</p>
+                    <p class="product-desc">嚴選當季新鮮大顆草莓，搭配日本進口歐牧鮮奶油，質地如雪般輕盈不膩；蓬鬆柔軟的日式香草戚風蛋糕，交織出最純粹的冬日幸福感。</p>
+                    <div class="product-meta">
+                        <span><i class="fa-solid fa-cake-candles"></i> 多規格可選 (片裝 / 6吋)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <div class="price-wrapper">
+                            <span class="price-label">季節限定特惠</span>
+                            <span class="product-price">NT$ 150 <span style="font-size:0.8rem; font-weight:normal;">起</span></span>
+                        </div>
+                        <button class="buy-now-btn" onclick="scrollToCheckoutAndSelect('strawberry-slice')" title="加入訂單"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 產品 3：布朗尼 -->
+            <div class="product-card">
+                <span class="product-tag">濃郁極致</span>
+                <div class="product-img-box">
+                    <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80" alt="熔岩系極濃巧克力布朗尼" class="product-img" onerror="this.src='https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80'">
+                </div>
+                <div class="product-body">
+                    <h3 class="product-title">熔岩巧克力布朗尼</h3>
+                    <p class="product-quote">「生活有點苦？用極濃黑巧療癒吧！」</p>
+                    <p class="product-desc">嚴選比利時 70% 苦甜巧克力，獨家重奶油配方打造出濕潤札實的 Fudge 口感。微波加熱 15 秒後享用，看著岩漿般的可可流心化開，簡真犯罪！</p>
+                    <div class="product-meta">
+                        <span><i class="fa-solid fa-fire-burner"></i> 建議加熱食用 (片裝 / 6吋)</span>
+                    </div>
+                    <div class="product-price-box">
+                        <div class="price-wrapper">
+                            <span class="price-label">私密療癒價</span>
+                            <span class="product-price">NT$ 100 <span style="font-size:0.8rem; font-weight:normal;">起</span></span>
+                        </div>
+                        <button class="buy-now-btn" onclick="scrollToCheckoutAndSelect('brownie-slice')" title="加入訂單"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 優惠促銷與稀缺性催單 (Offer & Scarcity) -->
+    <section class="offer-section">
+        <div class="offer-container">
+            <span class="offer-badge"><i class="fa-solid fa-truck-fast"></i> 限時滿額免運中</span>
+            <h2>本日手作新鮮出爐！倒數限量搶購</h2>
+            <p>主廚堅持當日手工現做，產量極其有限。現在下單「任選滿 $600 享低溫免運費」，快為辦公室與家人準備最完美的療癒下午茶！</p>
+            
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <span class="countdown-num" id="hours">02</span>
+                    <span class="countdown-label">時</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-num" id="minutes">45</span>
+                    <span class="countdown-label">分</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-num" id="seconds">09</span>
+                    <span class="countdown-label">秒</span>
+                </div>
+            </div>
+            
+            <a href="#checkout" class="btn-primary"><i class="fa-solid fa-bell"></i> 立即搶購今日名額</a>
+        </div>
+    </section>
+
+    <!-- 顧客好評 (Social Proof) -->
+    <section id="reviews">
+        <div class="section-title-box">
+            <span class="section-subtitle">TESTIMONIALS</span>
+            <h2 class="section-title">老饕們的真心推薦</h2>
+        </div>
+        
+        <div class="reviews-container">
+            <!-- 評論 1 -->
+            <div class="review-card">
+                <div class="review-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="review-content">「買了草莓戚風蛋糕給辦公室同仁當下午茶，大家都瘋掉了！鮮奶油非常輕盈，一點都不油膩，草莓給得超大方。回購名單首選！」</p>
+                <div class="review-user">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="消費者頭像" class="review-avatar">
+                    <div class="review-info">
+                        <h4>林小姐</h4>
+                        <span>知名科技公司 HR</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 評論 2 -->
+            <div class="review-card">
+                <div class="review-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="review-content">「馬卡龍真的完全不會死甜！我是很不愛甜食的人，居然一個人可以連吃兩顆，搭配黑咖啡簡直是絕配，包裝也非常精緻。」</p>
+                <div class="review-user">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="消費者頭像" class="review-avatar">
+                    <div class="review-info">
+                        <h4>張先生</h4>
+                        <span>自由設計師</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 評論 3 -->
+            <div class="review-card">
+                <div class="review-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="review-content">「強烈推薦布朗尼微波加熱一下！熱熱的流心巧克力搭配香草冰淇淋，冰火交融的感覺真的太邪惡、太幸福了！一定會再買！」</p>
+                <div class="review-user">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80" alt="消費者頭像" class="review-avatar">
+                    <div class="review-info">
+                        <h4>陳小美</h4>
+                        <span>甜點美學部落客</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常見問題 (FAQ) -->
+    <section class="section-bg-cream" id="faq">
+        <div class="section-title-box">
+            <span class="section-subtitle">FAQ</span>
+            <h2 class="section-title">購買常見問題</h2>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <span>1. 配送方式與運費怎麼計算？</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-body">
+                    我們全程採用「黑貓低溫冷凍/冷藏宅配」以確保最佳品質。運費統一為 NT$ 160。目前單筆訂單消費「滿 NT$ 600」即可享有免費宅配優惠！
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <span>2. 甜點可以保存多久？該怎麼食用？</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-body">
+                    【草莓蛋糕】建議冷藏保存並於 2 天內食用完畢。【馬卡龍與布朗尼】可冷凍保存 7 天。馬卡龍食用前請先退冰 10-15 分鐘；布朗尼強烈建議微波低溫加熱 10-15 秒，能達到最完美的熔岩流心狀態。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <span>3. 請問是蛋奶素嗎？有沒有過敏原？</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-body">
+                    本工作室全系列甜點皆為「蛋奶素可食」。產品含有麩質（小麥）、蛋類、乳製品及堅果（馬卡龍成分），若對上述成分過敏者，請斟酌食用。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <span>4. 下單後需要等待幾天才能收到？</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-body">
+                    為了保證極致的新鮮度，所有甜點皆為下單後接單製作。一般下單後約 3-5 個工作天出貨。如遇特殊慶祝、節日送禮需求，建議提早 1 週預訂並備註希望到貨日。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 結帳與下單區 (Checkout Form) -->
+    <section class="checkout-section" id="checkout">
+        <div class="section-title-box">
+            <span class="section-subtitle">ORDER NOW</span>
+            <h2 class="section-title">輕點幾下，美味送達</h2>
+        </div>
+        
+        <div class="checkout-container">
+            <!-- 左半部：填寫表單 -->
+            <div class="checkout-form-part">
+                <form id="orderForm" onsubmit="handleOrderSubmit(event)">
+                    
+                    <!-- 步驟 1: 選擇商品 -->
+                    <div class="form-step-title">
+                        <span>1</span> 選擇您的甜點品項
+                    </div>
+                    
+                    <!-- 商品品項列表 -->
+                    <div class="order-select-item" id="item-macaron">
+                        <div class="item-info-text">
+                            <h4>經典法式馬卡龍 (5入)</h4>
+                            <p>NT$ 200 / 盒</p>
+                        </div>
+                        <div class="qty-counter">
+                            <button type="button" class="qty-btn" onclick="updateQty('macaron', -1)"><i class="fa-solid fa-minus"></i></button>
+                            <span class="qty-num" id="qty-macaron">0</span>
+                            <button type="button" class="qty-btn" onclick="updateQty('macaron', 1)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="order-select-item" id="item-chestnut-montblanc">
+                        <div class="item-info-text">
+                            <h4>栗子蒙布朗蛋糕 (單個)</h4>
+                            <p>NT$ 170 / 個</p>
+                        </div>
+                        <div class="qty-counter">
+                            <button type="button" class="qty-btn" onclick="updateQty('chestnut-montblanc', -1)"><i class="fa-solid fa-minus"></i></button>
+                            <span class="qty-num" id="qty-chestnut-montblanc">0</span>
+                            <button type="button" class="qty-btn" onclick="updateQty('chestnut-montblanc', 1)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="order-select-item" id="item-strawberry-slice">
+                        <div class="item-info-text">
+                            <h4>草莓戚風蛋糕 (片裝)</h4>
+                            <p>NT$ 150 / 片</p>
+                        </div>
+                        <div class="qty-counter">
+                            <button type="button" class="qty-btn" onclick="updateQty('strawberry-slice', -1)"><i class="fa-solid fa-minus"></i></button>
+                            <span class="qty-num" id="qty-strawberry-slice">0</span>
+                            <button type="button" class="qty-btn" onclick="updateQty('strawberry-slice', 1)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="order-select-item" id="item-strawberry-6inch">
+                        <div class="item-info-text">
+                            <h4>草莓戚風蛋糕 (6吋)</h4>
+                            <p>NT$ 400 / 顆</p>
+                        </div>
+                        <div class="qty-counter">
+                            <button type="button" class="qty-btn" onclick="updateQty('strawberry-6inch', -1)"><i class="fa-solid fa-minus"></i></button>
+                            <span class="qty-num" id="qty-strawberry-6inch">0</span>
+                            <button type="button" class="qty-btn" onclick="updateQty('strawberry-6inch', 1)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="order-select-item" id="item-brownie-slice">
+                        <div class="item-info-text">
+                            <h4>極濃巧克力布朗尼 (片裝)</h4>
+                            <p>NT$ 100 / 片</p>
+                        </div>
+                        <div class="qty-counter">
+                            <button type="button" class="qty-btn" onclick="updateQty('brownie-slice', -1)"><i class="fa-solid fa-minus"></i></button>
+                            <span class="qty-num" id="qty-brownie-slice">0</span>
+                            <button type="button" class="qty-btn" onclick="updateQty('brownie-slice', 1)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="order-select-item" id="item-brownie-6inch">
+                        <div class="item-info-text">
+                            <h4>極濃巧克力布朗尼 (6吋)</h4>
+                            <p>NT$ 300 / 顆</p>
+                        </div>
+                        <div class="qty-counter">
+                            <button type="button" class="qty-btn" onclick="updateQty('brownie-6inch', -1)"><i class="fa-solid fa-minus"></i></button>
+                            <span class="qty-num" id="qty-brownie-6inch">0</span>
+                            <button type="button" class="qty-btn" onclick="updateQty('brownie-6inch', 1)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- 步驟 2: 收件資訊 -->
+                    <div class="form-step-title" style="margin-top: 35px;">
+                        <span>2</span> 收件與配送資訊
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">收件人姓名 *</label>
+                            <input type="text" id="name" class="form-control" required placeholder="如：王大明">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">聯絡電話 *</label>
+                            <input type="tel" id="phone" class="form-control" required placeholder="如：0912345678">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">電子信箱 (寄送出貨通知) *</label>
+                        <input type="email" id="email" class="form-control" required placeholder="name@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">低溫配送地址 *</label>
+                        <input type="text" id="address" class="form-control" required placeholder="請輸入完整收件地址">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">備註 / 希望配送時段（可指定早上或下午）</label>
+                        <textarea id="notes" class="form-control" rows="3" placeholder="例如：週六上午收件、有過敏原備註等..."></textarea>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- 右半部：訂單摘要 -->
+            <div class="checkout-summary-part">
+                <div>
+                    <h3>訂單明細摘要</h3>
+                    <div class="summary-list" id="summaryList">
+                        <p style="color: var(--text-light); font-size: 0.95rem; font-style: italic; text-align: center; padding: 20px 0;">
+                            尚未選擇任何商品...
+                        </p>
+                    </div>
+
+                    <div class="summary-item">
+                        <span>小計金額</span>
+                        <span id="summary-subtotal">NT$ 0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>低溫冷凍運費 (滿 $600 免運)</span>
+                        <span id="summary-shipping">NT$ 0</span>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-total">
+                        <span>總計金額</span>
+                        <span class="total-price" id="summary-total-price">NT$ 0</span>
+                    </div>
+
+                    <!-- 步驟 3: 付款方式 -->
+                    <h3 style="font-size: 1.1rem; margin-bottom: 15px;">付款方式</h3>
+                    <div class="payment-methods">
+                        <div class="payment-option selected" onclick="selectPayment('linepay')">
+                            <input type="radio" name="payment" id="pay-linepay" checked>
+                            <i class="fa-brands fa-line"></i>
+                            <strong>LINE Pay 行動支付</strong>
+                        </div>
+                        <div class="payment-option" onclick="selectPayment('credit')">
+                            <input type="radio" name="payment" id="pay-credit">
+                            <i class="fa-solid fa-credit-card"></i>
+                            <strong>信用卡線上刷卡 (免手續費)</strong>
+                        </div>
+                        <div class="payment-option" onclick="selectPayment('cod')">
+                            <input type="radio" name="payment" id="pay-cod">
+                            <i class="fa-solid fa-truck-ramp-box"></i>
+                            <strong>黑貓貨到付款 (+NT$30手續費)</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" form="orderForm" class="btn-primary" style="width: 100%; padding: 16px; font-size: 1.2rem; border-radius: 12px;">
+                    <i class="fa-solid fa-circle-check"></i> 確認送出，立即預訂
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾與安全標章 -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h4>La Petite Joie 手作甜點</h4>
+                <p>將生活中的細碎喜悅，揉進溫暖香甜的麵團中。一週只營業三天，把時間留給對極致食材與手作工藝的極致研磨。</p>
+                <div class="footer-badges">
+                    <span class="trust-badge"><i class="fa-solid fa-shield-halved"></i> 1000萬責任險</span>
+                    <span class="trust-badge"><i class="fa-solid fa-lock"></i> SSL 安全加密結帳</span>
+                    <span class="trust-badge"><i class="fa-solid fa-certificate"></i> 食品登錄合格</span>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h5>快速連結</h5>
+                <ul>
+                    <li><a href="#home">回到首頁</a></li>
+                    <li><a href="#about">職人精神</a></li>
+                    <li><a href="#products">明星甜點</a></li>
+                    <li><a href="#checkout">立即下單</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h5>聯絡我們</h5>
+                <p><i class="fa-solid fa-envelope"></i> service@lapetitejoie.com</p>
+                <p><i class="fa-solid fa-phone"></i> (02) 2345-6789</p>
+                <p><i class="fa-solid fa-location-dot"></i> 台北市信義區忠孝東路五段 100 號</p>
+                <p><i class="fa-solid fa-clock"></i> 客服時間：週一至週五 10:00 - 18:00</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 La Petite Joie 手作坊. All Rights Reserved. 本網頁僅供專案銷售範例呈現使用。</p>
+            <p>食品業者登錄字號：A-123456789-00000-0</p>
+        </div>
+    </footer>
+
+    <!-- 懸浮下單按鈕 (Sticky Float CTA) -->
+    <div class="floating-cta" id="floatingCta">
+        <a href="#checkout" class="floating-btn">
+            <i class="fa-solid fa-cart-shopping"></i> 今日限量預訂
+        </a>
+    </div>
+
+    <!-- 送出成功覆蓋彈出視窗 -->
+    <div class="submit-overlay" id="submitOverlay" onclick="closeSuccessModal()">
+        <div class="success-modal" onclick="event.stopPropagation()">
+            <div class="success-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h4>預訂成功！甜點排單製作中</h4>
+            <p id="success-message">感謝您的訂購。我們已收到您的訂單明細，出貨通知與訂單追蹤信件將會在 10 分鐘內寄送到您的電子信箱，請留意收信！</p>
+            <button class="btn-primary" onclick="closeSuccessModal()">好的，我知道了</button>
         </div>
     </div>
 
-    <script src="js/script.js"></script>
+    <!-- 13. 互動邏輯 JavaScript -->
+    <script>
+        // 商品定價定義
+        const productsInfo = {
+            'macaron': { name: '經典法式馬卡龍 (5入)', price: 200 },
+            'chestnut-montblanc': { name: '栗子蒙布朗蛋糕 (單個)', price: 170 },
+            'strawberry-slice': { name: '草莓戚風蛋糕 (片裝)', price: 150 },
+            'strawberry-6inch': { name: '草莓戚風蛋糕 (6吋)', price: 400 },
+            'brownie-slice': { name: '極濃巧克力布朗尼 (片裝)', price: 100 },
+            'brownie-6inch': { name: '極濃巧克力布朗尼 (6吋)', price: 300 }
+        };
+
+        // 購物車數量狀態
+        const cart = {
+            'chestnut-montblanc': 0,
+            'macaron': 0,
+            'strawberry-slice': 0,
+            'strawberry-6inch': 0,
+            'brownie-slice': 0,
+            'brownie-6inch': 0
+        };
+
+        // 常見問題 FAQ 收合控制
+        function toggleFaq(headerElement) {
+            const faqItem = headerElement.parentElement;
+            // 關閉其他開啟的 FAQ
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                }
+            });
+            // 切換目前的 FAQ
+            faqItem.classList.toggle('active');
+        }
+
+        // 點擊明星甜點的加號，平滑滾動到下單區，且自動 +1
+        function scrollToCheckoutAndSelect(productId) {
+            // 平滑滾動至下單區
+            document.getElementById('checkout').scrollIntoView({ behavior: 'smooth' });
+            
+            // 稍微延遲等滑動定位後加數量
+            setTimeout(() => {
+                if (cart[productId] === 0) {
+                    updateQty(productId, 1);
+                } else {
+                    // 如果原本就有，閃爍提示一下
+                    const element = document.getElementById(`item-${productId}`);
+                    element.style.transform = 'scale(1.03)';
+                    element.style.borderColor = 'var(--accent)';
+                    setTimeout(() => {
+                        element.style.transform = 'none';
+                    }, 200);
+                }
+            }, 300);
+        }
+
+        // 調整購物車內特定產品的數量
+        function updateQty(productId, change) {
+            const newQty = cart[productId] + change;
+            if (newQty < 0) return;
+            
+            cart[productId] = newQty;
+            document.getElementById(`qty-${productId}`).innerText = newQty;
+            
+            // 更新選項的外觀（高亮選取狀態）
+            const itemElement = document.getElementById(`item-${productId}`);
+            if (newQty > 0) {
+                itemElement.classList.add('selected');
+            } else {
+                itemElement.classList.remove('selected');
+            }
+            
+            // 重新計算總結
+            calculateTotal();
+        }
+
+        // 選擇付款方式
+        function selectPayment(paymentId) {
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+                option.querySelector('input[type="radio"]').checked = false;
+            });
+            
+            const targetOption = document.querySelector(`.payment-option[onclick="selectPayment('${paymentId}')"]`);
+            targetOption.classList.add('selected');
+            targetOption.querySelector('input[type="radio"]').checked = true;
+            
+            // 計算總結（因為貨到付款有手續費）
+            calculateTotal();
+        }
+
+        // 計算並渲染右半部訂單摘要
+        function calculateTotal() {
+            const summaryList = document.getElementById('summaryList');
+            const subtotalElement = document.getElementById('summary-subtotal');
+            const shippingElement = document.getElementById('summary-shipping');
+            const totalElement = document.getElementById('summary-total-price');
+            
+            let subtotal = 0;
+            let listHtml = '';
+            let hasItems = false;
+            
+            for (const key in cart) {
+                if (cart[key] > 0) {
+                    hasItems = true;
+                    const itemTotal = cart[key] * productsInfo[key].price;
+                    subtotal += itemTotal;
+                    
+                    listHtml += `
+                        <div class="summary-item active-product">
+                            <span>${productsInfo[key].name} x ${cart[key]}</span>
+                            <span>NT$ ${itemTotal}</span>
+                        </div>
+                    `;
+                }
+            }
+            
+            if (!hasItems) {
+                summaryList.innerHTML = `
+                    <p style="color: var(--text-light); font-size: 0.95rem; font-style: italic; text-align: center; padding: 20px 0;">
+                        尚未選擇任何商品...
+                    </p>
+                `;
+                subtotalElement.innerText = 'NT$ 0';
+                shippingElement.innerText = 'NT$ 0';
+                totalElement.innerText = 'NT$ 0';
+                return;
+            }
+            
+            summaryList.innerHTML = listHtml;
+            subtotalElement.innerText = `NT$ ${subtotal}`;
+            
+            // 運費邏輯：滿 600 免運，否則 160 元
+            let shipping = subtotal >= 600 ? 0 : 160;
+            
+            // 如果是貨到付款，黑貓會加收代收手續費 30 元
+            const isCod = document.getElementById('pay-cod').checked;
+            let codFeeText = '';
+            if (isCod) {
+                shipping += 30;
+                codFeeText = ' (含貨到付款手續費 $30)';
+            }
+            
+            shippingElement.innerText = shipping === 0 ? '免運費' : `NT$ ${shipping}${codFeeText}`;
+            
+            const finalTotal = subtotal + shipping;
+            totalElement.innerText = `NT$ ${finalTotal}`;
+        }
+
+        // 表單送出事件處理
+        function handleOrderSubmit(e) {
+            e.preventDefault();
+            
+            // 先檢查是否有選取甜點
+            let hasItems = false;
+            let orderSummaryText = '';
+            for (const key in cart) {
+                if (cart[key] > 0) {
+                    hasItems = true;
+                    orderSummaryText += `${productsInfo[key].name} * ${cart[key]} \n`;
+                }
+            }
+            
+            if (!hasItems) {
+                // 用自訂 Modal 或是非 Alert 的精緻方式提示
+                alert('請先在第一步中加購至少一項美味的甜點再結帳喔！');
+                return;
+            }
+            
+            // 獲取個人資訊
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const totalPrice = document.getElementById('summary-total-price').innerText;
+            
+            // 渲染成功對話框中的訊息內容
+            const msgElement = document.getElementById('success-message');
+            msgElement.innerHTML = `親愛的 <strong>${name}</strong> 您好，感謝您的預訂！<br><br>我們已成功登記您的訂購：<br><span style="color: var(--primary-dark); font-size: 0.9rem;">${orderSummaryText.replace(/\n/g, '<br>')}</span> <strong>總金額：${totalPrice}</strong><br><br>出貨通知信與金流明細隨後將發送至 <strong>${email}</strong>，請隨時留意信箱。`;
+            
+            // 開啟成功彈窗
+            document.getElementById('submitOverlay').classList.add('active');
+            
+            // 重設表單與購物車
+            document.getElementById('orderForm').reset();
+            for (const key in cart) {
+                cart[key] = 0;
+                document.getElementById(`qty-${key}`).innerText = '0';
+                document.getElementById(`item-${key}`).classList.remove('selected');
+            }
+            calculateTotal();
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('submitOverlay').classList.remove('active');
+        }
+
+        // 滾動時，控制右下角「懸浮下單按鈕」的顯示與隱藏（在首頁滑過後出現）
+        window.addEventListener('scroll', function() {
+            const floatingCta = document.getElementById('floatingCta');
+            const heroHeight = document.getElementById('home').offsetHeight;
+            
+            if (window.scrollY > heroHeight - 150) {
+                floatingCta.classList.add('show');
+            } else {
+                floatingCta.classList.remove('show');
+            }
+        });
+
+        // 促銷活動倒數計時器（設定為每次載入均固定倒數 2 小時 45 分 09 秒做為氛圍催單）
+        let secondsLeft = (2 * 60 * 60) + (45 * 60) + 9;
+        
+        function updateCountdown() {
+            const hrs = Math.floor(secondsLeft / 3600);
+            const mins = Math.floor((secondsLeft % 3600) / 60);
+            const secs = secondsLeft % 60;
+            
+            document.getElementById('hours').innerText = hrs.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = mins.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = secs.toString().padStart(2, '0');
+            
+            if (secondsLeft > 0) {
+                secondsLeft--;
+            } else {
+                // 倒數完重置，維持催單張力
+                secondsLeft = (2 * 60 * 60) + (45 * 60) + 9;
+            }
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>
